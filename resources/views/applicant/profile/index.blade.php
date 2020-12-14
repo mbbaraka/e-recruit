@@ -93,8 +93,8 @@
                                     <div class="col-lg-6">
                                         <span class="pf-title">Date of Birth</span>
                                         <div class="pf-field">
-                                            <input type="date" name="dob" class="@error('dob') is-invalid @enderror" value="{{ $particulars->date_of_birth }}"/>
-                                            @error('dob')
+                                            <input type="date" name="date_of_birth" class="@error('date_of_birth') is-invalid @enderror" value="{{ $particulars->date_of_birth }}"/>
+                                            @error('date_of_birth')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
                                             </span>

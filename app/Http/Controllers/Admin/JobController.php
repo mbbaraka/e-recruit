@@ -9,22 +9,29 @@ use App\Models\Home\Job;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Alert;
+use Illuminate\Support\Facades\Auth;
+use App\User;
+use App\Models\Applicant\Particular;
 
 class JobController extends Controller
 {
     public function index()
     {
+        $user =  User::find(Auth::user()->id);
+        $particulars = Particular::where('user_id', $user->id)->first();
         $jobcount = Job::get();
         $jobs = Job::paginate(6);
         $applications = Application::get()->count();
         $active_jobs = $jobcount->where('status', 1)->count();
-        return view('admin.jobs.index', compact('jobs', 'active_jobs', 'jobcount', 'applications'));
+        return view('ors.admin.jobs.index', compact('jobs', 'active_jobs', 'jobcount', 'applications', 'user', 'particulars'));
     }
 
     public function new()
     {
         $categories = Category::get();
-        return view('admin.jobs.new', compact('categories'));
+        $user =  User::find(Auth::user()->id);
+        $particulars = Particular::where('user_id', $user->id)->first();
+        return view('ors.admin.jobs.create', compact('categories', 'user', 'particulars'));
     }
 
     public function edit($id)
@@ -62,7 +69,7 @@ class JobController extends Controller
         $job->title = $request->title;
         $job->description = $request->description;
         $job->job_type = $request->type;
-        $job->deadline = $request->deadline;
+        $job->deadline = Carbon::create($request->deadline);
         $job->experience = $request->experience;
         $job->qualification = $request->qualification;
         $job->status = $request->status;
@@ -90,7 +97,6 @@ class JobController extends Controller
             'deadline' => 'required',
             'description' => 'required',
             'type' => 'required',
-            'category' => 'required',
             'document' => 'nullable|mimes:txt,pdf,doc',
             'qualification' => 'required',
             'experience' => 'required',
@@ -114,11 +120,10 @@ class JobController extends Controller
         $job->title = $request->title;
         $job->description = $request->description;
         $job->job_type = $request->type;
-        $job->deadline = $request->deadline;
+        $job->deadline = Carbon::create($request->deadline);
         $job->experience = $request->experience;
         $job->qualification = $request->qualification;
         $job->status = $request->status;
-        $job->vacancies = $request->vacancies;
         $job->document = $document;
         $job->salary_range = $request->salary_range;
         $job->location = $request->location;

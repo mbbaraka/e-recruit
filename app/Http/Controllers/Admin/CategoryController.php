@@ -7,13 +7,18 @@ use App\Http\Controllers\Controller;
 use App\Models\Home\Category;
 use Illuminate\Http\Request;
 use Alert;
+use App\User;
+use App\Models\Applicant\Particular;
+use Illuminate\Support\Facades\Auth;
 
 class CategoryController extends Controller
 {
     public function index()
     {
+        $user =  User::find(Auth::user()->id);
+        $particulars = Particular::where('user_id', $user->id)->first();
         $categories = Category::get();
-        return view('admin.categories.index', compact('categories'));
+        return view('ors.admin.categories.index', compact('categories', 'user', 'particulars'));
     }
 
     public function store(Request $request)

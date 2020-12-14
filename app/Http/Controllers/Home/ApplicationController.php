@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Home;
 use App\Http\Controllers\Controller;
 use App\Models\Applicant\Resume;
 use App\Models\Home\Application;
+use App\User;
+use App\Models\Applicant\Particular;
 use App\Models\Home\Job;
 use App\Models\Home\JobView;
 use Illuminate\Http\Request;
@@ -30,10 +32,13 @@ class ApplicationController extends Controller
     public function index($id)
     {
 
+        $user = User::find(Auth::user()->id);
+        $particulars = Particular::where('user_id', $user->id)->first();
         $job = Job::find($id);
+        $applications = Application::where('job_id', $id)->get()->count();
         $views = JobView::where('job_id', $id)->count();
         $resumes = Resume::where('user_id', Auth::user()->id)->get();
-        return view('home.jobs.apply', compact('job', 'resumes', 'views'));
+        return view('ors.applicant.jobs.apply', compact('job', 'resumes', 'views', 'user', 'particulars', 'applications'));
     }
 
     public function store(Request $request)
@@ -58,6 +63,8 @@ class ApplicationController extends Controller
 
     public function applySuccess()
     {
-        return view('home.jobs.success');
+        $user = User::find(Auth::user()->id);
+        $particulars = Particular::where('user_id', $user->id)->first();
+        return view('ors.applicant.jobs.success', compact('user', 'particulars'));
     }
 }

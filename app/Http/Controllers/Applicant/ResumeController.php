@@ -9,6 +9,8 @@ use App\Models\Applicant\Experience;
 use App\Models\Applicant\Skills;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\User;
+use App\Models\Applicant\Particular;
 use Alert;
 
 class ResumeController extends Controller
@@ -16,15 +18,17 @@ class ResumeController extends Controller
     public function index()
     {
         $resumes = Resume::where('user_id', Auth::user()->id)->get();
-        return view('applicant.resume.index', compact(
-            'resumes'
+        $user = User::find(Auth::user()->id);
+        $particulars = Particular::where('user_id', $user->id)->first();
+        return view('ors.applicant.resume.index', compact(
+            'resumes', 'user', 'particulars'
         ));
     }
 
     public function store(Request $request)
     {
         $this->validate($request, [
-            'resume' => 'required',
+            'resume' => 'required|unique:resumes,title',
         ]);
 
         $resume = new Resume();
@@ -42,12 +46,14 @@ class ResumeController extends Controller
 
     public function view($id)
     {
+        $user = User::find(Auth::user()->id);
+        $particulars = Particular::where('user_id', $user->id)->first();
         $resume = Resume::find($id);
         $experiences = Experience::where('user_id', Auth::user()->id)->where('resume_id', $id)->get();
         $educations = Education::where('user_id', Auth::user()->id)->where('resume_id', $id)->get();
         $skills = Skills::where('user_id', Auth::user()->id)->where('resume_id', $id)->get();
-        return view('applicant.resume.view', compact(
-            'resume', 'educations', 'experiences', 'skills'
+        return view('ors.applicant.resume.view', compact(
+            'resume', 'educations', 'experiences', 'skills', 'user', 'particulars'
         ));
     }
 

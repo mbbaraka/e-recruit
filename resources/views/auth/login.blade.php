@@ -1,8 +1,12 @@
-@extends('layouts.app')
+@extends('ors.layouts.app')
+
+@section('title')
+Login
+@endsection
 
 @section('content')
 
-<section>
+{{-- <section>
     <div class="block remove-bottom">
         <div class="container">
             <span class="row justify-content-center text-muted">To apply you must be logged in.</span>
@@ -77,5 +81,38 @@
             </div>
         </div>
     </div>
-</section>
+</section> --}}
+
+<div class="w3-row">
+    <div class="w3-third w3-display-middle">
+        <div class="w3-card-4 w3-border-light-blue w3-border p-5" style="border-radius: 20%;">
+            <form class="w3-card w3-border-light-blue w3-border w3-round w3-round-xxlarge w3-padding" action="{{ route('login') }}" method="POST">
+                @csrf
+                <h2 class="w3-text-blue w3-center" style="text-shadow:1px 1px 0 #444">Login</h2>
+                <hr class="w3-light-blue">
+                <div class="w3-container">
+                    <label for="email">Email <strong class="text-danger">*</strong></label>
+                    <input type="email" value="{{ old('email') }}" name="email" class="w3-input w3-round w3-round-large @error('email') w3-border-red @enderror" id="">
+                    @error('email')
+                        <small><strong class="w3-text-red" role="alert">{{ $message }}</strong></small>
+                    @enderror
+                </div>
+                <br>
+                <div class="w3-container">
+                    <label for="password">Password <strong class="text-danger">*</strong></label>
+                    <input type="password" name="password" class="w3-input w3-round w3-round-large @error('password') w3-border-red @enderror" id="">
+                    @error('password')
+                        <small><strong class="w3-text-red" role="alert">{{ $message }}</strong></small>
+                    @enderror
+                </div>
+                <br>
+                <button class="w3-btn w3-light-blue w3-block w3-round w3-round-large" type="submit">Submit</button>
+                <br>
+                <span class="w3-text-blue"><a href="{{ route('password.request') }}"style="text-decoration: none">Forgot Password?</a></span>
+                <span class="float-right w3-text-blue"><a style="text-decoration: none" href="{{ route('register') }}">Register</a></span>
+            </form>
+        </div>
+    </div>
+</div>
+
 @endsection

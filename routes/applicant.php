@@ -1,7 +1,7 @@
 <!-- Human resource routes -->
 <?php
 
-Route::group(['prefix' => '/home', 'middleware' => 'auth', 'namespace' => 'Applicant'], function (){
+Route::group(['prefix' => '/', 'middleware' => 'auth', 'namespace' => 'Applicant'], function (){
     Route::get('/', 'HomeController@index')->name('applicant.index');
     Route::get('/resume', 'ResumeController@index')->name('applicant.resume.index');
     Route::post('/resume/store', 'ResumeController@store')->name('applicant.resume.store');
@@ -28,4 +28,5 @@ Route::group(['prefix' => '/home', 'middleware' => 'auth', 'namespace' => 'Appli
 
     // Jobs applied for
     Route::get('/jobs/applied', 'JobController@index')->name('applicant.jobs.applied');
+    Route::get('/jobs', 'JobController@index')->name('applicant.jobs.index');
 });

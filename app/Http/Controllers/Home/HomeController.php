@@ -8,25 +8,41 @@ use App\Models\Home\JobView;
 use App\Models\Home\Subscription;
 use Illuminate\Http\Request;
 use Illuminate\View\ViewServiceProvider;
-use Alert;
+use App\User;
+use App\Models\Applicant\Particular;
+use App\Models\Home\Application;
+use Illuminate\Support\Facades\Auth;
 use RealRashid\SweetAlert\Facades\Alert as FacadesAlert;
 
 class HomeController extends Controller
 {
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index()
     {
         $jobs = Job::where('status', '1')->where('deadline', '>', now())->get()->take(5);
-        return view('home.index', compact('jobs'));
+        return view('ors.applicant.index', compact('jobs'));
     }
 
     public function singleJob($id)
     {
+        $user = User::find(Auth::user()->id);
+        $particulars = Particular::where('user_id', $user->id)->first();
         $view = new JobView();
         $view->job_id = $id;
         $view->save();
         $job = Job::find($id);
+        $applications = Application::where('job_id', $id)->get()->count();
         $views = JobView::where('job_id', $id)->count();
-        return view('home.jobs.single', compact('job', 'views'));
+        return view('ors.applicant.jobs.single', compact('job', 'views', 'user', 'particulars', 'applications'));
     }
 
     public function subscribe(Request $request)

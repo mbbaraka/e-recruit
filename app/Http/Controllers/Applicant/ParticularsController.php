@@ -15,35 +15,39 @@ class ParticularsController extends Controller
     {
         $user = User::find(Auth::user()->id);
         $particulars = Particular::where('user_id', $user->id)->first();
-        return view('applicant.profile.index', compact('user', 'particulars'));
+        return view('ors.applicant.profile.index', compact('user', 'particulars'));
     }
 
     public function update(Request $request, $id)
     {
+        // dd(var_dump($request));
         $this->validate($request, [
-            'f_name' => 'required',
-            'l_name' => 'required',
+            'first_name' => 'required',
+            'last_name' => 'required',
             'email' => 'required|email',
-            'dob' => 'required',
+            'date_of_birth' => 'required',
             'address' => 'required',
-            'phone' => 'required',
+            'phone_number' => 'required',
         ]);
 
         $user = User::find($id);
-        $user->first_name = $request->f_name;
-        $user->last_name = $request->l_name;
+        $user->first_name = $request->first_name;
+        $user->last_name = $request->last_name;
         $user->email = $request->email;
 
         $save = $user->save();
 
         if($save){
             $particulars = Particular::where('user_id', $id)->first();
-            $particulars->phone = $request->phone;
-            $particulars->date_of_birth = $request->dob;
+            $particulars->phone = $request->phone_number;
+            $particulars->date_of_birth = $request->date_of_birth;
             $particulars->address = $request->address;
 
             $save = $particulars->save();
             toast('Successfully updated your details', 'success');
+            return redirect()->back();
+        }else{
+            toast('Some error occured. Try again later', 'success');
             return redirect()->back();
         }
     }
