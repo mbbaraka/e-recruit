@@ -1,4 +1,3 @@
-<!-- Human resource routes -->
 
 <?php
 
@@ -16,8 +15,15 @@ Route::group(['prefix' => '/admin', 'middleware' => 'can:isAdmin, 1', 'namespace
     Route::get('/applications', 'ApplicationController@index')->name('admin.applications.index');
     Route::get('/applications/{id}/view', 'ApplicationController@view')->name('admin.applications.view');
     Route::get('/applications/{application}/resume/{user}', 'ApplicationController@resume')->name('admin.applications.resume');
-    // Route::get('/staffs', 'PageController@staffs')->name('hr.staffs');
+    Route::get('/shortlist', 'ShortlistController@index')->name('admin.shortlist.index');
+    Route::post('/shortlist/add', 'ShortlistController@store')->name('admin.shortlist.add');
+    Route::get('/notifications', 'ShortlistController@store')->name('admin.shortlist.add');
     // Route::get('/appraisers', 'PageController@appraisers')->name('hr.appraisers');
     // Route::get('/appraisals', 'PageController@appraisals')->name('hr.appraisals');
     // Route::get('/', 'HomeController@index')->name('hr.index');
+});
+Route::group(['prefix' => '/admin', 'middleware' => 'can:isAdmin, 1', 'namespace' => 'Home'], function (){
+
+    Route::get('/notifications', 'NotificationController@index')->name('admin.notifications');
+
 });

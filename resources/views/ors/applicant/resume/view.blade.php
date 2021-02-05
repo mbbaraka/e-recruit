@@ -1,5 +1,8 @@
 @extends('ors.layouts.app')
 
+@section('title')
+View {{ $resume->title }}
+@endsection
 @section('content')
    <!-- Navbar -->
    <div class="w3-top">
@@ -69,12 +72,12 @@
          <div class="w3-card-4">
             <div class="list-group w3-round-large">
              <li class="w3-center list-group-item list-group-item-action w3-light-blue">Quick Links</li>
-             <a href="{{ route('applicant.profile.index') }}" class="list-group-item list-group-item-action" style="text-decoration: none"><i class="fa fa-file"></i> &nbsp; My Profile</a>
-             <a href="{{ route('applicant.resume.index') }}" class="list-group-item list-group-item-action active" style="text-decoration: none"><i class="fa fa-briefcase"></i> &nbsp; My Resume</a>
-             <a href="{{ route('applicant.jobs.index') }}" class="list-group-item list-group-item-action" style="text-decoration: none"><i class="fas fa-suitcase"></i> &nbsp; Available Jobs</a>
+             <a href="{{ route('applicant.index') }}" class="list-group-item list-group-item-action" style="text-decoration: none"><i class="fa fa-home"></i> &nbsp; Dashboard</a>
+             <a href="{{ route('applicant.resume.index') }}" class="list-group-item list-group-item-action active" style="text-decoration: none"><i class="fa fa-paper-plane"></i> &nbsp; My Resume</a>
+             <a href="{{ route('applicant.jobs.index') }}" class="list-group-item list-group-item-action" style="text-decoration: none"><i class="fa fa-briefcase"></i> &nbsp; Available Jobs</a>
              <a href="#" class="list-group-item list-group-item-action" style="text-decoration: none"><i class="fa fa-envelope"></i> &nbsp; Cover Letter</a>
-             <a href="#" class="list-group-item list-group-item-action" style="text-decoration: none"><i class="fa fa-paper-plane"></i> &nbsp; Short Listed Jobs</a>
-             <a href="#" class="list-group-item list-group-item-action" style="text-decoration: none"><i class="fa fa-paper-plane"></i> &nbsp; My Interviews</a>
+             <a href="#" class="list-group-item list-group-item-action" style="text-decoration: none"><i class="fa fa-question"></i> &nbsp; My Interviews</a>
+             <a href="{{ route('applicant.profile.index') }}" class="list-group-item list-group-item-action" style="text-decoration: none"><i class="fa fa-user"></i> &nbsp; My Profile</a>
              </div>
          </div>
          <br>
@@ -118,7 +121,7 @@
                         <div class="w3-container">
                           <p>Education level not added yet</p>
                         </div>
-                        @endif
+                        @endif 
                       </div>
                       <div class="w3-container w3-card w3-white w3-margin-top">
                         <h2 class="w3-text-grey w3-padding-16">
@@ -140,6 +143,30 @@
                         @else
                         <div class="w3-container">
                           <p>Work experience not added yet</p>
+                        </div>
+                        @endif
+                      </div>
+
+                      <div class="w3-container w3-card w3-white w3-margin-top">
+                        <h2 class="w3-text-grey w3-padding-16">
+                            <i class="fas fa-people-carry fa-fw w3-margin-right w3-xxlarge w3-text-teal"></i>
+                            Relevant Skills
+                            <span data-target="#newSkill" data-toggle="modal" class="w3-right btn-sm w3-btn w3-round w3-light-blue"><i class="fa fa-plus"> New</i></span>
+                        </h2>
+                        @if ($skills->count() > 0)
+                            @foreach ($skills as $skill)
+                              <div class="w3-container">
+                                <h5 class="w3-opacity"><b>{{ $skill->title }} / {{ $skill->company }}</b></h5>
+                                <h6 class="w3-text-teal"><i class="fa fa-calendar fa-fw w3-margin-right"></i>{{ date('M Y', strtotime($skill->from)) . ' - ' . date('M Y', strtotime($skill->to)) }}</h6>
+                                <p>
+                                    {!! Str::limit($skill->description, 100, '...') !!}
+                                </p>
+                                <hr><br>
+                              </div>
+                            @endforeach
+                        @else
+                        <div class="w3-container">
+                          <p>Skills not added yet</p>
                         </div>
                         @endif
                       </div>
@@ -309,8 +336,79 @@
                 </form>
             </div>
         </div>
-    </div>
-     <!-- End Grid -->
+       </div>
+
+       <!-- Skill Modal -->
+       <div class="modal fade" id="newSkill" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">New Skill</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                </div>
+                <form action="{{ route('applicant.experience.store', $resume->id) }}" method="POST">
+                    @csrf
+                    <div class="row p-3">
+                        <div class="col-lg-12 m-3">
+                            <div class="w3-container">
+                                <span class="w3-label">Skill</span>
+                                <input type="text" value="{{ old('skill') }}" name="skill" class="w3-input w3-round w3-round-large @error('skill') w3-border-red @enderror" placeholder="Skill" />
+                                @error('skill')
+                                    <span class="w3-text-red" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="col-lg-12 m-3">
+                            <div class="w3-container">
+                                <span class="w3-lable">Level</span>&nbsp;
+                                <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                  <label title="struggling" class="btn btn-secondary active">
+                                    <input title="" type="radio" name="level" id="1" autocomplete="off" checked=""> 1
+                                  </label>
+                                  <label title="poor" class="btn btn-secondary">
+                                    <input type="radio" name="level" id="2" autocomplete="off"> 2
+                                  </label>
+                                  <label title="fair" class="btn btn-secondary">
+                                    <input title="fair" type="radio" name="level" id="3" autocomplete="off"> 3
+                                  </label>
+                                  <label title="good" class="btn btn-secondary">
+                                    <input type="radio" name="level" id="4" autocomplete="off"> 4
+                                  </label>
+                                  <label title="excellent" class="btn btn-secondary">
+                                    <input type="radio" name="level" id="5" autocomplete="off"> 5
+                                  </label>
+                                </div>
+                                @error('level')
+                                    <span class="w3-text-red" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="col-lg-12 m-3">
+                            <div class="w3-container">
+                                <span class="w3-label">Description</span>
+                                <textarea name="description" class="w3-input w3-round w3-round-large @error('description') w3-border-red @enderror">{{ old('description') }}</textarea>
+                                @error('description')
+                                    <span class="w3-text-red" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="w3-container m-3">
+                            <button type="submit" class="w3-btn w3-round w3-light-blue w3-roung-large">Submit</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+       </div>
+      <!-- End Grid -->
      </div>
 
    <!-- End Page Container -->

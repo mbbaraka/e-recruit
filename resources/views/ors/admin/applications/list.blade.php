@@ -73,9 +73,11 @@ Manage Applicants
          <div class="w3-card-4">
             <div class="list-group w3-round-large">
              <li class="w3-center list-group-item list-group-item-action w3-light-blue">Quick Links</li>
+             <a href="{{ url('/admin') }}" class="list-group-item list-group-item-action" style="text-decoration: none"><i class="fas fa-home"></i> &nbsp; Dashboard</a>
              <a href="{{ route('admin.jobs.index') }}" class="list-group-item list-group-item-action" style="text-decoration: none"><i class="fa fa-briefcase"></i> &nbsp; Manage Jobs</a>
              <a href="{{ route('admin.categories.index') }}" class="list-group-item list-group-item-action" style="text-decoration: none"><i class="fas fa-th"></i> &nbsp; Job Categories</a>
              <a href="{{ route('admin.applications.index') }}" class="list-group-item list-group-item-action active" style="text-decoration: none"><i class="fa fa-envelope"></i> &nbsp; Applications</a>
+             <a href="{{ route('admin.shortlist.index') }}" class="list-group-item list-group-item-action" style="text-decoration: none"><i class="fas fa-list"></i> &nbsp; Shortlists</a>
              <a href="#" class="list-group-item list-group-item-action" style="text-decoration: none"><i class=" fas fa-question"></i> &nbsp; Interviews</a>
              <a href="#" class="list-group-item list-group-item-action" style="text-decoration: none"><i class="fa fa-user"></i> &nbsp; My Profile</a>
              <a href="#" class="list-group-item list-group-item-action" style="text-decoration: none"><i class="fas fa-cogs"></i> &nbsp; Settings</a>
@@ -116,14 +118,30 @@ Manage Applicants
                             </thead>
 
                             @foreach ($applications as $key => $item)
+                              <tr>
                                 <td>{{ $key +1 }}</td>
                                 <td>{{ $item->users->first_name.' '.$item->users->last_name }}</td>
                                 <td>
                                     <div class="btn-group">
                                         <a class="w3-btn btn btn-sm btn-light" href="{{ route('admin.applications.resume', [$item->id, $item->users->id]) }}" target="_blank" title="View Resume"><i class="fa fa-eye"></i></a>
-                                        <button class="w3-btn btn btn-sm btn-light" title="Shortlist Applicant"><i class="fa fa-check"></i></button>
+                                       {{--  @if($check == 1)
+                                          <form method="post" action="{{ route('admin.shortlist.add') }}">
+                                            @csrf
+                                            <input type="hidden" name="user" value="{{ $item->users->id}}">
+                                            <input type="hidden" name="job" value="{{ $item->jobs->id}}">
+                                            <button class="w3-btn btn btn-sm btn-success" title="Already Shortlisted" ><i class="fa fa-check"></i></button><button class="w3-btn btn btn-sm btn-danger" title="Remove from Shortlist" type="submit"><i class="fa fa-times"></i></button>
+                                          </form>
+                                        @else --}}
+                                          <form method="post" action="{{ route('admin.shortlist.add') }}">
+                                            @csrf
+                                            <input type="hidden" name="user" value="{{ $item->users->id}}">
+                                            <input type="hidden" name="job" value="{{ $item->jobs->id}}">
+                                            <button class="w3-btn btn btn-sm btn-light" title="Shortlist Applicant" type="submit"><i class="fa fa-check"></i></button>
+                                          </form>
+                                        {{-- @endif --}}
                                     </div>
                                 </td>
+                              </tr>
                             @endforeach
                         </table>
                         {{ $applications->links() }}

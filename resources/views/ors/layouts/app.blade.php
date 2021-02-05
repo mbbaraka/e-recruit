@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+<head>
 <title>ORS :: @yield('title')</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -12,6 +13,8 @@
 <style>
 html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
 </style>
+
+</head>
 <body class="w3-theme-l5">
     @include('sweetalert::alert')
 
@@ -25,26 +28,20 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
 <script src="{{ asset('assets/summernote/summernote-bs4.min.js') }}"></script>
 <script>
 // Accordion
-function myFunction(id) {
-    var x = document.getElementById(id);
-    if (x.className.indexOf("w3-show") == -1) {
-        x.className += " w3-show";
-        x.previousElementSibling.className += " w3-theme-d1";
+// Toggle between showing and hiding the sidebar when clicking the menu icon
+var mySidebar = document.getElementById("mySidebar");
+
+function w3_open() {
+    if (mySidebar.style.display === 'block') {
+        mySidebar.style.display = 'none';
     } else {
-        x.className = x.className.replace("w3-show", "");
-        x.previousElementSibling.className =
-        x.previousElementSibling.className.replace(" w3-theme-d1", "");
+        mySidebar.style.display = 'block';
     }
 }
 
-// Used to toggle the menu on smaller screens when clicking on the menu button
-function openNav() {
-    var x = document.getElementById("navDemo");
-    if (x.className.indexOf("w3-show") == -1) {
-        x.className += " w3-show";
-    } else {
-        x.className = x.className.replace(" w3-show", "");
-    }
+// Close the sidebar with the close button
+function w3_close() {
+    mySidebar.style.display = "none";
 }
 </script>
 <script>
@@ -52,7 +49,7 @@ function openNav() {
 
       $(function () {
           // Summernote
-          $('#textarea').summernote()
+          $('.textarea').summernote()
       })
   </script>
 </body>

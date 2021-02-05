@@ -17,4 +17,8 @@ class Job extends Model
     {
         return $this->hasMany('App\Models\Home\Application', 'job_id');
     }
+    public function shortlist()
+    {
+        return $this->hasMany('App\Models\Admin\Shortlist', 'job_id');
+    }
 }

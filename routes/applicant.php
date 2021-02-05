@@ -1,4 +1,4 @@
-<!-- Human resource routes -->
+
 <?php
 
 Route::group(['prefix' => '/', 'middleware' => 'auth', 'namespace' => 'Applicant'], function (){

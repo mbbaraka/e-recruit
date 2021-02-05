@@ -9,6 +9,7 @@ use App\Models\Applicant\Resume;
 use App\Models\Applicant\Skills;
 use App\Models\Home\Application;
 use App\Models\Home\Job;
+use App\Models\Admin\Shortlist;
 use App\User;
 use App\Models\Applicant\Particular;
 use Illuminate\Http\Request;
@@ -31,10 +32,12 @@ class ApplicationController extends Controller
 
     public function view($id)
     {
+        // $check = "";
         $user =  User::find(Auth::user()->id);
         $particulars = Particular::where('user_id', $user->id)->first();
         $job =Job::find($id);
         $applications = Application::where('job_id', $id)->paginate(5);
+
         return view('ors.admin.applications.list', compact('applications', 'job', 'user', 'particulars'));
     }
 

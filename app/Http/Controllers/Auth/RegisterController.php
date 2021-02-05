@@ -40,7 +40,7 @@ class RegisterController extends Controller
         $particulars->user_id = Auth::user()->id;
         $particulars->save();
         Alert::info('Registration', 'Complete your registration');
-        return '/ors/applicant/profile/index';
+        return '/profile';
     }
 
     /**

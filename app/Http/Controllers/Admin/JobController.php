@@ -36,9 +36,11 @@ class JobController extends Controller
 
     public function edit($id)
     {
+        $user =  User::find(Auth::user()->id);
+        $particulars = Particular::where('user_id', $user->id)->first();
         $categories = Category::get();
         $job = Job::find($id);
-        return view('admin.jobs.edit', compact('categories', 'job'));
+        return view('ors.admin.jobs.edit', compact('categories', 'job', 'user', 'particulars'));
     }
 
     public function store(Request $request)

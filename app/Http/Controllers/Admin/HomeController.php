@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Applicant\Particular;
 use App\Models\Home\Application;
+use App\Models\Admin\Notification;
 use App\Models\Home\Job;
 use App\User;
 use Illuminate\Http\Request;
@@ -18,6 +19,9 @@ class HomeController extends Controller
         $user =  User::find(Auth::user()->id);
         $particulars = Particular::where('user_id', $user->id)->first();
         $jobs = Job::where('deadline', '>=', now())->latest()->get();
-        return view('ors.admin.index', compact('user', 'particulars', 'applications', 'jobs'));
+        $all_jobs = Job::get();
+        $all_applications = Application::get();
+        $notification = Notification::where('receiver_id', Auth::user()->id)->where('status', '0')->get();
+        return view('ors.admin.index', compact('user', 'particulars', 'applications', 'jobs', 'all_jobs', 'all_applications', 'notification'));
     }
 }

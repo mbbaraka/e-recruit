@@ -72,10 +72,12 @@ Administrator
 
          <div class="w3-card-4">
             <div class="list-group w3-round-large">
-             <li class="w3-center list-group-item list-group-item-action w3-light-blue">Quick Links</li>
+             <li class="w3-center list-group-item list-group-item-action w3-theme-d2">Quick Links</li>
+             <a href="{{ url('/admin') }}" class="list-group-item list-group-item-action active" style="text-decoration: none"><i class="fas fa-home"></i> &nbsp; Dashboard</a>
              <a href="{{ route('admin.jobs.index') }}" class="list-group-item list-group-item-action" style="text-decoration: none"><i class="fa fa-briefcase"></i> &nbsp; Manage Jobs</a>
              <a href="{{ route('admin.categories.index') }}" class="list-group-item list-group-item-action" style="text-decoration: none"><i class="fas fa-th"></i> &nbsp; Job Categories</a>
              <a href="{{ route('admin.applications.index') }}" class="list-group-item list-group-item-action" style="text-decoration: none"><i class="fa fa-envelope"></i> &nbsp; Applications</a>
+             <a href="{{ route('admin.shortlist.index') }}" class="list-group-item list-group-item-action" style="text-decoration: none"><i class="fas fa-list"></i> &nbsp; Shortlists</a>
              <a href="#" class="list-group-item list-group-item-action" style="text-decoration: none"><i class=" fas fa-question"></i> &nbsp; Interviews</a>
              <a href="#" class="list-group-item list-group-item-action" style="text-decoration: none"><i class="fa fa-user"></i> &nbsp; My Profile</a>
              <a href="#" class="list-group-item list-group-item-action" style="text-decoration: none"><i class="fas fa-cogs"></i> &nbsp; Settings</a>
@@ -100,28 +102,28 @@ Administrator
                   </header>
 
                   <div class="w3-row-padding w3-margin-bottom">
-                    <a href="#" class="w3-quarter" style="text-decoration: none">
-                      <div class="w3-container w3-card-4 w3-hover-shadow w3-white w3-text-light-blue w3-padding-16 w3-round w3-round-large">
+                    <a href="{{ route('admin.jobs.index') }}" class="w3-quarter" style="text-decoration: none">
+                      <div class="w3-container w3-card-4 w3-hover-shadow w3-white w3-theme-d2 w3-padding-16 w3-round w3-round-large">
                         <div class="w3-left"><i class="fa fa-briefcase w3-xxxlarge"></i></div>
                         <div class="w3-right">
-                          <h3>52</h3>
+                          <h3>{{ count($all_jobs) }}</h3>
                         </div>
                         <div class="w3-clear"></div>
                         <h4>Jobs</h4>
                       </div>
                     </a>
-                    <a href="#" class="w3-quarter" style="text-decoration: none">
-                      <div class="w3-container w3-card-4 w3-hover-shadow w3-white w3-text-light-blue w3-padding-16 w3-round w3-round-large">
+                    <a href="{{ route('admin.applications.index') }}" class="w3-quarter" style="text-decoration: none">
+                      <div class="w3-container w3-card-4 w3-hover-shadow w3-white w3-theme-d2 w3-padding-16 w3-round w3-round-large">
                         <div class="w3-left"><i class="fa fa-envelope w3-xxxlarge"></i></div>
                         <div class="w3-right">
-                          <h3>99</h3>
+                          <h3>{{ count($all_applications) }}</h3>
                         </div>
                         <div class="w3-clear"></div>
                         <h4>Applications</h4>
                       </div>
                     </a>
-                    <a href="#" class="w3-quarter" style="text-decoration: none">
-                      <div class="w3-container w3-card-4 w3-hover-shadow w3-white w3-text-light-blue w3-padding-16 w3-round w3-round-large">
+                    <a href="{{ route('admin.applications.index') }}" class="w3-quarter" style="text-decoration: none">
+                      <div class="w3-container w3-card-4 w3-hover-shadow w3-white w3-theme-d2 w3-padding-16 w3-round w3-round-large">
                         <div class="w3-left"><i class="fa fa-question w3-xxxlarge"></i></div>
                         <div class="w3-right">
                           <h3>23</h3>
@@ -130,11 +132,11 @@ Administrator
                         <h4>Interviews</h4>
                       </div>
                     </a>
-                    <a href="#" class="w3-quarter" style="text-decoration: none">
-                      <div class="w3-container w3-card-4 w3-hover-shadow w3-white w3-text-light-blue w3-padding-16 w3-round w3-round-large">
+                    <a href="{{ route('admin.notifications') }}" class="w3-quarter" style="text-decoration: none">
+                      <div class="w3-container w3-card-4 w3-hover-shadow w3-white w3-theme-d2 w3-padding-16 w3-round w3-round-large">
                         <div class="w3-left"><i class="fa fa-bell w3-xxxlarge"></i></div>
                         <div class="w3-right">
-                          <h3>50</h3>
+                          <h3>{{ count($notification) }}</h3>
                         </div>
                         <div class="w3-clear"></div>
                         <h4>Notifications</h4>
@@ -147,14 +149,18 @@ Administrator
                       <div class="w3-full">
                         <h5>Recent Applications</h5>
                         <table class="w3-table w3-striped w3-white w3-hoverable">
+                          @if(count($applications) > 0)
                           @foreach ($applications as $key => $apps)
-                          <tr>
-                            <td>{{ $key + 1 }}</td>
-                            <td>{{ $apps->jobs->title }}</td>
-                            <td>{{ $apps->users->first_name .' '. $apps->users->last_name }}</td>
-                            <td><i>{{ $apps->created_at->diffForHumans() }}</i></td>
-                          </tr>
+                            <tr>
+                              <td>{{ $key + 1 }}</td>
+                              <td>{{ $apps->jobs->title }}</td>
+                              <td>{{ $apps->users->first_name .' '. $apps->users->last_name }}</td>
+                              <td><i>{{ $apps->created_at->diffForHumans() }}</i></td>
+                            </tr>
                           @endforeach
+                          @else
+                          <tr><td>No applications yet! </td></tr>
+                          @endif
                         </table>
                       </div>
                     </div>
@@ -164,13 +170,17 @@ Administrator
                   <div class="w3-container">
                     <h5>Recent Job Opportunities</h5>
                     <table class="w3-table w3-striped w3-bordered w3-border w3-hoverable w3-white">
-                        @foreach ($jobs as $key => $job)
-                        <tr>
-                          <td>{{ $key + 1 }}</td>
-                          <td>{{ $job->title }}</td>
-                          <td><i class="fa fa-calendar"> &nbsp;</i>{{ date('d M', strtotime($job->deadline)) }}</td>
-                        </tr>
-                        @endforeach
+                        @if(count($jobs) > 0)
+                          @foreach ($jobs as $key => $job)
+                          <tr>
+                            <td>{{ $key + 1 }}</td>
+                            <td>{{ $job->title }}</td>
+                            <td><i class="fa fa-calendar"> &nbsp;</i>{{ date('d M', strtotime($job->deadline)) }}</td>
+                          </tr>
+                          @endforeach
+                        @else
+                          <span>No job opportunities added yet! </span>
+                        @endif
                     </table>
                   </div>
                   <hr>
@@ -191,7 +201,7 @@ Administrator
    <br>
 
    <!-- Footer -->
-   <footer class="w3-container w3-theme-d3 w3-padding-16 w3-center">
+   <footer class="w3-bar-block w3-theme-d2 w3-padding-16 w3-center">
      <h5>{{ date('Y') }} &copy; Online Recruitment System </h5>
    </footer>
 @endsection

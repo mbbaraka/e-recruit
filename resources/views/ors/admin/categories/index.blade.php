@@ -73,9 +73,11 @@ Manage Jobs
          <div class="w3-card-4">
             <div class="list-group w3-round-large">
              <li class="w3-center list-group-item list-group-item-action w3-light-blue">Quick Links</li>
+             <a href="{{ url('/admin') }}" class="list-group-item list-group-item-action" style="text-decoration: none"><i class="fas fa-home"></i> &nbsp; Dashboard</a>
              <a href="{{ route('admin.jobs.index') }}" class="list-group-item list-group-item-action" style="text-decoration: none"><i class="fa fa-briefcase"></i> &nbsp; Manage Jobs</a>
              <a href="{{ route('admin.categories.index') }}" class="list-group-item list-group-item-action active" style="text-decoration: none"><i class="fas fa-th"></i> &nbsp; Job Categories</a>
              <a href="{{ route('admin.applications.index') }}" class="list-group-item list-group-item-action" style="text-decoration: none"><i class="fa fa-envelope"></i> &nbsp; Applications</a>
+             <a href="{{ route('admin.shortlist.index') }}" class="list-group-item list-group-item-action" style="text-decoration: none"><i class="fas fa-list"></i> &nbsp; Shortlists</a>
              <a href="#" class="list-group-item list-group-item-action" style="text-decoration: none"><i class=" fas fa-question"></i> &nbsp; Interviews</a>
              <a href="#" class="list-group-item list-group-item-action" style="text-decoration: none"><i class="fa fa-user"></i> &nbsp; My Profile</a>
              <a href="#" class="list-group-item list-group-item-action" style="text-decoration: none"><i class="fas fa-cogs"></i> &nbsp; Settings</a>
@@ -176,16 +178,16 @@ Manage Jobs
                                 @csrf
                                 <div class="row">
                                     <div class="col-lg-12">
-                                        <span class="pf-title">Category</span>
+                                        <span class="w3-container">Category</span>
                                         <div class="pf-field">
-                                            <input type="text" name="category" class="@error('category') @enderror" placeholder="Category" />
+                                            <input type="text" name="category" class="@error('category') w3-border-red @enderror w3-input w3-round w3-round-large" placeholder="Category" />
                                             @error('category')
-                                                <span>{{ $message }}</span>
+                                                <span class="text-danger">{{ $message }}</span>
                                             @enderror
                                         </div>
-                                    </div>
-
+                                        <br>
                                     <button type="submit" class="btn btn-primary">Submit</button>
+                                    </div>
 
                                 </div>
                             </form>
