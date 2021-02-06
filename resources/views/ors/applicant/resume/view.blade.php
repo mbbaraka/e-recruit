@@ -6,49 +6,8 @@ View {{ $resume->title }}
 @section('content')
    <!-- Navbar -->
    <div class="w3-top">
-    <div class="w3-bar w3-theme-d2 w3-left-align w3-large">
-     <a class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-padding-large w3-hover-white w3-large w3-theme-d2" href="javascript:void(0);" onclick="openNav()"><i class="fa fa-bars"></i></a>
-     <a href="#" class="w3-bar-item w3-button w3-padding-large w3-theme-d4">
-        {{-- <img src="{{ asset('logo.png') }}" class="img-fluid" alt=""> --}}
-     </a>
-     <a href="#" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" title="News"><i class="fa fa-globe"></i></a>
-     <a href="#" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" title="Account Settings"><i class="fa fa-user"></i></a>
-     <a href="#" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" title="Messages"><i class="fa fa-envelope"></i></a>
-     <div class="w3-dropdown-hover w3-hide-small">
-       <button class="w3-button w3-padding-large" title="Notifications"><i class="fa fa-bell"></i><span class="w3-badge w3-right w3-small w3-green">3</span></button>
-       <div class="w3-dropdown-content w3-card-4 w3-bar-block" style="width:300px">
-         <a href="#" class="w3-bar-item w3-button">One new friend request</a>
-         <a href="#" class="w3-bar-item w3-button">John Doe posted on your wall</a>
-         <a href="#" class="w3-bar-item w3-button">Jane likes your post</a>
-       </div>
-     </div>
-
-
-     <a href="{ route('logout') }}" onclick="event.preventDefault();
-     document.getElementById('logout-form').submit();" class="w3-bar-item w3-button w3-right w3-hide-small w3-padding-large w3-hover-white" title="Logout"><i class="fa fa-power-off"></i>
-
-        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-            @csrf
-        </form>
-     </a>
-     <div class="w3-dropdown w3-hover w3-right w3-hide-small">
-       <button class="w3-button w3-padding-large" title="Notifications"><i class="fa fa-bell"></i><span class="w3-badge w3-right w3-small w3-green">3</span></button>
-       <div class="w3-dropdown-content w3-card-4 w3-bar-block" style="width:300px">
-         <a href="#" class="w3-bar-item w3-button">One new friend request</a>
-         <a href="#" class="w3-bar-item w3-button">John Doe posted on your wall</a>
-         <a href="#" class="w3-bar-item w3-button">Jane likes your post</a>
-       </div>
-     </div>
-    </div>
-   </div>
-
-   <!-- Navbar on small screens -->
-   <div id="navDemo" class="w3-bar-block w3-theme-d2 w3-hide w3-hide-large w3-hide-medium w3-large">
-     <a href="#" class="w3-bar-item w3-button w3-padding-large">Link 1</a>
-     <a href="#" class="w3-bar-item w3-button w3-padding-large">Link 2</a>
-     <a href="#" class="w3-bar-item w3-button w3-padding-large">Link 3</a>
-     <a href="#" class="w3-bar-item w3-button w3-padding-large">My Profile</a>
-   </div>
+   <!-- Navbar (sit on top) -->
+    @include('partials.header')
 
    <!-- Page Container -->
    <div class="container w3-content" style="margin-top:80px">
@@ -69,7 +28,7 @@ View {{ $resume->title }}
          </div>
          <br>
 
-         <div class="w3-card-4">
+         <div class="w3-card-4 w3-hide-small">
             <div class="list-group w3-round-large">
              <li class="w3-center list-group-item list-group-item-action w3-light-blue">Quick Links</li>
              <a href="{{ route('applicant.index') }}" class="list-group-item list-group-item-action" style="text-decoration: none"><i class="fa fa-home"></i> &nbsp; Dashboard</a>
@@ -156,8 +115,10 @@ View {{ $resume->title }}
                         @if ($skills->count() > 0)
                             @foreach ($skills as $skill)
                               <div class="w3-container">
-                                <h5 class="w3-opacity"><b>{{ $skill->title }} / {{ $skill->company }}</b></h5>
-                                <h6 class="w3-text-teal"><i class="fa fa-calendar fa-fw w3-margin-right"></i>{{ date('M Y', strtotime($skill->from)) . ' - ' . date('M Y', strtotime($skill->to)) }}</h6>
+                                <h5 class="w3-opacity"><b>{{ $skill->skill }}</b></h5>
+                                <h6 class="w3-text-teal"><i class="far fa-chart-bar fa-fw w3-margin-right"></i>
+                                  Level : {{ ($skill->level/5) * 100 }}%
+                                </h6>
                                 <p>
                                     {!! Str::limit($skill->description, 100, '...') !!}
                                 </p>
@@ -348,7 +309,7 @@ View {{ $resume->title }}
                             <span aria-hidden="true">&times;</span>
                         </button>
                 </div>
-                <form action="{{ route('applicant.experience.store', $resume->id) }}" method="POST">
+                <form action="{{ route('applicant.skill.store', $resume->id) }}" method="POST">
                     @csrf
                     <div class="row p-3">
                         <div class="col-lg-12 m-3">
@@ -367,19 +328,19 @@ View {{ $resume->title }}
                                 <span class="w3-lable">Level</span>&nbsp;
                                 <div class="btn-group btn-group-toggle" data-toggle="buttons">
                                   <label title="struggling" class="btn btn-secondary active">
-                                    <input title="" type="radio" name="level" id="1" autocomplete="off" checked=""> 1
+                                    <input title="" type="radio" value="1" name="level" id="1" autocomplete="off" checked=""> 1
                                   </label>
                                   <label title="poor" class="btn btn-secondary">
-                                    <input type="radio" name="level" id="2" autocomplete="off"> 2
+                                    <input type="radio" value="2" name="level" id="2" autocomplete="off"> 2
                                   </label>
                                   <label title="fair" class="btn btn-secondary">
-                                    <input title="fair" type="radio" name="level" id="3" autocomplete="off"> 3
+                                    <input title="fair" value="3" type="radio" name="level" id="3" autocomplete="off"> 3
                                   </label>
                                   <label title="good" class="btn btn-secondary">
-                                    <input type="radio" name="level" id="4" autocomplete="off"> 4
+                                    <input type="radio" value="4" name="level" id="4" autocomplete="off"> 4
                                   </label>
                                   <label title="excellent" class="btn btn-secondary">
-                                    <input type="radio" name="level" id="5" autocomplete="off"> 5
+                                    <input type="radio" value="5" name="level" id="5" autocomplete="off"> 5
                                   </label>
                                 </div>
                                 @error('level')

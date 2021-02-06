@@ -17,7 +17,8 @@ class CreateLettersTable extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->string('title');
-            $table->text('content');
+            $table->text('description');
+            $table->string('document');
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

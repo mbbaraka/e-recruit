@@ -5,52 +5,8 @@ Home
 @endsection
 
 @section('content')
-   <!-- Navbar -->
-   <div class="w3-top">
-    <div class="w3-bar w3-theme-d2 w3-left-align w3-large">
-     <a class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-padding-large w3-hover-white w3-large w3-theme-d2" href="javascript:void(0);" onclick="openNav()"><i class="fa fa-bars"></i></a>
-     <a href="#" class="w3-bar-item w3-button w3-padding-large w3-theme-d4">
-        {{-- <img src="{{ asset('logo.png') }}" class="img-fluid" alt=""> --}}
-     </a>
-     <a href="#" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" title="News"><i class="fa fa-globe"></i></a>
-     <a href="#" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" title="Account Settings"><i class="fa fa-user"></i></a>
-     <a href="#" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" title="Messages"><i class="fa fa-envelope"></i></a>
-     <div class="w3-dropdown-hover w3-hide-small">
-       <button class="w3-button w3-padding-large" title="Notifications"><i class="fa fa-bell"></i><span class="w3-badge w3-right w3-small w3-green">3</span></button>
-       <div class="w3-dropdown-content w3-card-4 w3-bar-block" style="width:300px">
-         <a href="#" class="w3-bar-item w3-button">One new friend request</a>
-         <a href="#" class="w3-bar-item w3-button">John Doe posted on your wall</a>
-         <a href="#" class="w3-bar-item w3-button">Jane likes your post</a>
-       </div>
-     </div>
-
-
-     <a href="{ route('logout') }}" onclick="event.preventDefault();
-     document.getElementById('logout-form').submit();" class="w3-bar-item w3-button w3-right w3-hide-small w3-padding-large w3-hover-white" title="Logout"><i class="fa fa-power-off"></i>
-
-        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-            @csrf
-        </form>
-     </a>
-     <div class="w3-dropdown w3-hover w3-right w3-hide-small">
-       <button class="w3-button w3-padding-large" title="Notifications"><i class="fa fa-bell"></i><span class="w3-badge w3-right w3-small w3-green">3</span></button>
-       <div class="w3-dropdown-content w3-card-4 w3-bar-block" style="width:300px">
-         <a href="#" class="w3-bar-item w3-button">One new friend request</a>
-         <a href="#" class="w3-bar-item w3-button">John Doe posted on your wall</a>
-         <a href="#" class="w3-bar-item w3-button">Jane likes your post</a>
-       </div>
-     </div>
-    </div>
-   </div>
-
-   <!-- Navbar on small screens -->
-   <div id="navDemo" class="w3-bar-block w3-theme-d2 w3-hide w3-hide-large w3-hide-medium w3-large">
-     <a href="#" class="w3-bar-item w3-button w3-padding-large">Link 1</a>
-     <a href="#" class="w3-bar-item w3-button w3-padding-large">Link 2</a>
-     <a href="#" class="w3-bar-item w3-button w3-padding-large">Link 3</a>
-     <a href="#" class="w3-bar-item w3-button w3-padding-large">My Profile</a>
-   </div>
-
+   <!-- Navbar (sit on top) -->
+    @include('partials.header')
    <!-- Page Container -->
    <div class="container w3-content" style="margin-top:80px">
      <!-- The Grid -->
@@ -70,7 +26,7 @@ Home
          </div>
          <br>
 
-         <div class="w3-card-4">
+         <div class="w3-card-4 w3-hide-small">
             <div class="list-group w3-round-large">
              <li class="w3-center list-group-item list-group-item-action w3-light-blue">Quick Links</li>
              <a href="{{ route('applicant.index') }}" class="list-group-item list-group-item-action active" style="text-decoration: none"><i class="fa fa-home"></i> &nbsp; Dashboard</a>
@@ -97,50 +53,92 @@ Home
                  {{-- <span class="w3-right w3-jumbo"><i class="fa fa-return"></i></span> --}}
                  <hr class="w3-clear">
                  <div class="w3-row-padding">
-                     <div class="w3-row-padding w3-margin-bottom">
-                    <a href="{{ route('admin.jobs.index') }}" class="w3-quarter" style="text-decoration: none">
-                      <div class="w3-container w3-card-4 w3-hover-shadow w3-white w3-theme-d2 w3-padding-16 w3-round w3-round-large">
-                        <div class="w3-left"><i class="fa fa-briefcase w3-xxxlarge"></i></div>
-                        <div class="w3-right">
-                          <h3>{{-- {{ count($all_jobs) }} --}}</h3>
+                     <div class="w3-row-padding w3-margin-bottom w3-hide-small">
+                      <a href="{{ route('admin.jobs.index') }}" class="w3-quarter" style="text-decoration: none">
+                        <div class="w3-container w3-card-4 w3-hover-shadow w3-white w3-theme-d2 w3-padding-16 w3-round w3-round-large">
+                          <div class="w3-left"><i class="fa fa-briefcase w3-xxxlarge"></i></div>
+                          <div class="w3-right">
+                            <h3>{{-- {{ count($all_jobs) }} --}}</h3>
+                          </div>
+                          <div class="w3-clear"></div>
+                          <h4>New Jobs</h4>
                         </div>
-                        <div class="w3-clear"></div>
-                        <h4>New Jobs</h4>
-                      </div>
-                    </a>
-                    <a href="{{ route('admin.applications.index') }}" class="w3-quarter" style="text-decoration: none">
-                      <div class="w3-container w3-card-4 w3-hover-shadow w3-white w3-theme-d2 w3-padding-16 w3-round w3-round-large">
-                        <div class="w3-left"><i class="fa fa-envelope w3-xxxlarge"></i></div>
-                        <div class="w3-right">
-                          <h3>{{-- {{ count($all_applications) }} --}}</h3>
+                      </a>
+                      <a href="{{ route('admin.applications.index') }}" class="w3-quarter" style="text-decoration: none">
+                        <div class="w3-container w3-card-4 w3-hover-shadow w3-white w3-theme-d2 w3-padding-16 w3-round w3-round-large">
+                          <div class="w3-left"><i class="fa fa-envelope w3-xxxlarge"></i></div>
+                          <div class="w3-right">
+                            <h3>{{-- {{ count($all_applications) }} --}}</h3>
+                          </div>
+                          <div class="w3-clear"></div>
+                          <h4>Applications</h4>
                         </div>
-                        <div class="w3-clear"></div>
-                        <h4>Applications</h4>
-                      </div>
-                    </a>
-                    <a href="{{ route('admin.applications.index') }}" class="w3-quarter" style="text-decoration: none">
-                      <div class="w3-container w3-card-4 w3-hover-shadow w3-white w3-theme-d2 w3-padding-16 w3-round w3-round-large">
-                        <div class="w3-left"><i class="fa fa-question w3-xxxlarge"></i></div>
-                        <div class="w3-right">
-                          <h3>23</h3>
+                      </a>
+                      <a href="{{ route('admin.applications.index') }}" class="w3-quarter" style="text-decoration: none">
+                        <div class="w3-container w3-card-4 w3-hover-shadow w3-white w3-theme-d2 w3-padding-16 w3-round w3-round-large">
+                          <div class="w3-left"><i class="fa fa-question w3-xxxlarge"></i></div>
+                          <div class="w3-right">
+                            <h3>23</h3>
+                          </div>
+                          <div class="w3-clear"></div>
+                          <h4>Interviews</h4>
                         </div>
-                        <div class="w3-clear"></div>
-                        <h4>Interviews</h4>
-                      </div>
-                    </a>
-                    <a href="{{ route('admin.notifications') }}" class="w3-quarter" style="text-decoration: none">
-                      <div class="w3-container w3-card-4 w3-hover-shadow w3-white w3-theme-d2 w3-padding-16 w3-round w3-round-large">
-                        <div class="w3-left"><i class="fa fa-bell w3-xxxlarge"></i></div>
-                        <div class="w3-right">
-                          <h3>{{-- {{ count($notification) }} --}}</h3>
+                      </a>
+                      <a href="{{ route('admin.notifications') }}" class="w3-quarter" style="text-decoration: none">
+                        <div class="w3-container w3-card-4 w3-hover-shadow w3-white w3-theme-d2 w3-padding-16 w3-round w3-round-large">
+                          <div class="w3-left"><i class="fa fa-bell w3-xxxlarge"></i></div>
+                          <div class="w3-right">
+                            <h3>{{ ORS::notification() }}</h3>
+                          </div>
+                          <div class="w3-clear"></div>
+                          <h4>Notifications</h4>
                         </div>
-                        <div class="w3-clear"></div>
-                        <h4>Notifications</h4>
-                      </div>
-                    </a>
-                  </div>
+                      </a>
+                    </div>
+                    <div class="w3-hide-medium w3-hide-large row">
+                      <a href="{{ route('admin.jobs.index') }}" class="col-md-3 col-6 pb-2" style="text-decoration: none">
+                        <div class="w3-container w3-card-4 w3-hover-shadow w3-white w3-theme-d2 w3-padding-16 w3-round w3-round-large">
+                          <div class="w3-left"><i class="fa fa-briefcase w3-xxxlarge"></i></div>
+                          <div class="w3-right">
+                            <h3>{{-- {{ count($all_jobs) }} --}}</h3>
+                          </div>
+                          <div class="w3-clear"></div>
+                          <h4>New Jobs</h4>
+                        </div>
+                      </a>
+                      <a href="{{ route('admin.applications.index') }}" class="col-md-3 col-6" style="text-decoration: none">
+                        <div class="w3-container w3-card-4 w3-hover-shadow w3-white w3-theme-d2 w3-padding-16 w3-round w3-round-large">
+                          <div class="w3-left"><i class="fa fa-envelope w3-xxxlarge"></i></div>
+                          <div class="w3-right">
+                            <h3>{{-- {{ count($all_applications) }} --}}</h3>
+                          </div>
+                          <div class="w3-clear"></div>
+                          <h4>Applications</h4>
+                        </div>
+                      </a>
+                      <a href="{{ route('admin.applications.index') }}" class="col-md-3 col-6" style="text-decoration: none">
+                        <div class="w3-container w3-card-4 w3-hover-shadow w3-white w3-theme-d2 w3-padding-16 w3-round w3-round-large">
+                          <div class="w3-left"><i class="fa fa-question w3-xxxlarge"></i></div>
+                          <div class="w3-right">
+                            <h3>23</h3>
+                          </div>
+                          <div class="w3-clear"></div>
+                          <h4>Interviews</h4>
+                        </div>
+                      </a>
+                      <a href="{{ route('admin.notifications') }}" class="col-md-3 col-6" style="text-decoration: none">
+                        <div class="w3-container w3-card-4 w3-hover-shadow w3-white w3-theme-d2 w3-padding-16 w3-round w3-round-large">
+                          <div class="w3-left"><i class="fa fa-bell w3-xxxlarge"></i></div>
+                          <div class="w3-right">
+                            <h3>{{-- {{ count($notification) }} --}}</h3>
+                          </div>
+                          <div class="w3-clear"></div>
+                          <h4>Notifications</h4>
+                        </div>
+                      </a>
+                    </div>
                  </div>
-               </div>
+               </div> 
              </div>
            </div>
          </div>

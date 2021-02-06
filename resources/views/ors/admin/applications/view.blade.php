@@ -5,52 +5,10 @@
 View Resume
 @endsection
 
+
 @section('content')
-   <!-- Navbar -->
-   <div class="w3-top">
-    <div class="w3-bar w3-theme-d2 w3-left-align w3-large">
-     <a class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-padding-large w3-hover-white w3-large w3-theme-d2" href="javascript:void(0);" onclick="openNav()"><i class="fa fa-bars"></i></a>
-     <a href="#" class="w3-bar-item w3-button w3-padding-large w3-theme-d4">
-        {{-- <img src="{{ asset('logo.png') }}" class="img-fluid" alt=""> --}}
-     </a>
-     <a href="#" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" title="News"><i class="fa fa-globe"></i></a>
-     <a href="#" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" title="Account Settings"><i class="fa fa-user"></i></a>
-     <a href="#" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" title="Messages"><i class="fa fa-envelope"></i></a>
-     <div class="w3-dropdown-hover w3-hide-small">
-       <button class="w3-button w3-padding-large" title="Notifications"><i class="fa fa-bell"></i><span class="w3-badge w3-right w3-small w3-green">3</span></button>
-       <div class="w3-dropdown-content w3-card-4 w3-bar-block" style="width:300px">
-         <a href="#" class="w3-bar-item w3-button">One new friend request</a>
-         <a href="#" class="w3-bar-item w3-button">John Doe posted on your wall</a>
-         <a href="#" class="w3-bar-item w3-button">Jane likes your post</a>
-       </div>
-     </div>
-
-
-     <a href="{ route('logout') }}" onclick="event.preventDefault();
-     document.getElementById('logout-form').submit();" class="w3-bar-item w3-button w3-right w3-hide-small w3-padding-large w3-hover-white" title="Logout"><i class="fa fa-power-off"></i>
-
-        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-            @csrf
-        </form>
-     </a>
-     <div class="w3-dropdown w3-hover w3-right w3-hide-small">
-       <button class="w3-button w3-padding-large" title="Notifications"><i class="fa fa-bell"></i><span class="w3-badge w3-right w3-small w3-green">3</span></button>
-       <div class="w3-dropdown-content w3-card-4 w3-bar-block" style="width:300px">
-         <a href="#" class="w3-bar-item w3-button">One new friend request</a>
-         <a href="#" class="w3-bar-item w3-button">John Doe posted on your wall</a>
-         <a href="#" class="w3-bar-item w3-button">Jane likes your post</a>
-       </div>
-     </div>
-    </div>
-   </div>
-
-   <!-- Navbar on small screens -->
-   <div id="navDemo" class="w3-bar-block w3-theme-d2 w3-hide w3-hide-large w3-hide-medium w3-large">
-     <a href="#" class="w3-bar-item w3-button w3-padding-large">Link 1</a>
-     <a href="#" class="w3-bar-item w3-button w3-padding-large">Link 2</a>
-     <a href="#" class="w3-bar-item w3-button w3-padding-large">Link 3</a>
-     <a href="#" class="w3-bar-item w3-button w3-padding-large">My Profile</a>
-   </div>
+   <!-- Navbar (sit on top) -->
+    @include('partials.admin-header')
 
    <!-- Page Container -->
    <div class="container w3-content" style="margin-top:80px">
@@ -71,7 +29,7 @@ View Resume
          </div>
          <br>
 
-         <div class="w3-card-4">
+         <div class="w3-card-4 w3-hide-small">
             <div class="list-group w3-round-large">
              <li class="w3-center list-group-item list-group-item-action w3-light-blue">Quick Links</li>
              <a href="{{ url('/admin') }}" class="list-group-item list-group-item-action" style="text-decoration: none"><i class="fas fa-home"></i> &nbsp; Dashboard</a>
@@ -155,6 +113,30 @@ View Resume
                                 </div>
                                 @endif
                               </div>
+                              <div class="w3-container w3-card w3-white w3-margin-top">
+                              <h2 class="w3-text-grey w3-padding-16">
+                                  <i class="fas fa-people-carry fa-fw w3-margin-right w3-xxlarge w3-text-teal"></i>
+                                  Relevant Skills
+                              </h2>
+                              @if ($skills->count() > 0)
+                                  @foreach ($skills as $skill)
+                                    <div class="w3-container">
+                                      <h5 class="w3-opacity"><b>{{ $skill->skill }}</b></h5>
+                                      <h6 class="w3-text-teal"><i class="far fa-chart-bar fa-fw w3-margin-right"></i>
+                                        Level : {{ ($skill->level/5) * 100 }}%
+                                      </h6>
+                                      <p>
+                                          {!! Str::limit($skill->description, 100, '...') !!}
+                                      </p>
+                                      <hr><br>
+                                    </div>
+                                  @endforeach
+                              @else
+                              <div class="w3-container">
+                                <p>Skills not added yet</p>
+                              </div>
+                              @endif
+                            </div>
 
                          </div>
                     </div>

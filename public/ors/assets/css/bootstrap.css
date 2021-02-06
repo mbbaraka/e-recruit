@@ -3874,7 +3874,7 @@ tbody.collapse.show {
   border-color: #dee2e6 #dee2e6 #fff;
 }
 
-.nav-tabs .dropdown-menu {
+.nav-tabs .dropdown-menu { 
   margin-top: -1px;
   border-top-left-radius: 0;
   border-top-right-radius: 0;
@@ -5154,7 +5154,7 @@ tbody.collapse.show {
 }
 
 .list-group-item:hover, .list-group-item:focus {
-  z-index: 1;
+  z-index: 0;
   text-decoration: none;
 }
 
@@ -5164,7 +5164,7 @@ tbody.collapse.show {
 }
 
 .list-group-item.active {
-  z-index: 2;
+  z-index: 0;
   color: #fff;
   background-color: #007bff;
   border-color: #007bff;

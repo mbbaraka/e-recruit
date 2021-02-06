@@ -5,52 +5,8 @@ Success
 @endsection
 
 @section('content')
-   <!-- Navbar -->
-   <div class="w3-top">
-    <div class="w3-bar w3-theme-d2 w3-left-align w3-large">
-     <a class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-padding-large w3-hover-white w3-large w3-theme-d2" href="javascript:void(0);" onclick="openNav()"><i class="fa fa-bars"></i></a>
-     <a href="#" class="w3-bar-item w3-button w3-padding-large w3-theme-d4">
-        {{-- <img src="{{ asset('logo.png') }}" class="img-fluid" alt=""> --}}
-     </a>
-     <a href="#" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" title="News"><i class="fa fa-globe"></i></a>
-     <a href="#" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" title="Account Settings"><i class="fa fa-user"></i></a>
-     <a href="#" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" title="Messages"><i class="fa fa-envelope"></i></a>
-     <div class="w3-dropdown-hover w3-hide-small">
-       <button class="w3-button w3-padding-large" title="Notifications"><i class="fa fa-bell"></i><span class="w3-badge w3-right w3-small w3-green">3</span></button>
-       <div class="w3-dropdown-content w3-card-4 w3-bar-block" style="width:300px">
-         <a href="#" class="w3-bar-item w3-button">One new friend request</a>
-         <a href="#" class="w3-bar-item w3-button">John Doe posted on your wall</a>
-         <a href="#" class="w3-bar-item w3-button">Jane likes your post</a>
-       </div>
-     </div>
-
-
-     <a href="{ route('logout') }}" onclick="event.preventDefault();
-     document.getElementById('logout-form').submit();" class="w3-bar-item w3-button w3-right w3-hide-small w3-padding-large w3-hover-white" title="Logout"><i class="fa fa-power-off"></i>
-
-        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-            @csrf
-        </form>
-     </a>
-     <div class="w3-dropdown w3-hover w3-right w3-hide-small">
-       <button class="w3-button w3-padding-large" title="Notifications"><i class="fa fa-bell"></i><span class="w3-badge w3-right w3-small w3-green">3</span></button>
-       <div class="w3-dropdown-content w3-card-4 w3-bar-block" style="width:300px">
-         <a href="#" class="w3-bar-item w3-button">One new friend request</a>
-         <a href="#" class="w3-bar-item w3-button">John Doe posted on your wall</a>
-         <a href="#" class="w3-bar-item w3-button">Jane likes your post</a>
-       </div>
-     </div>
-    </div>
-   </div>
-
-   <!-- Navbar on small screens -->
-   <div id="navDemo" class="w3-bar-block w3-theme-d2 w3-hide w3-hide-large w3-hide-medium w3-large">
-     <a href="#" class="w3-bar-item w3-button w3-padding-large">Link 1</a>
-     <a href="#" class="w3-bar-item w3-button w3-padding-large">Link 2</a>
-     <a href="#" class="w3-bar-item w3-button w3-padding-large">Link 3</a>
-     <a href="#" class="w3-bar-item w3-button w3-padding-large">My Profile</a>
-   </div>
-
+   <!-- Navbar (sit on top) -->
+    @include('partials.header')
    <!-- Page Container -->
    <div class="container w3-content" style="margin-top:80px">
      <!-- The Grid -->
@@ -70,7 +26,7 @@ Success
          </div>
          <br>
 
-         <div class="w3-card-4">
+         <div class="w3-card-4 w3-hide-small">
            <div class="list-group w3-round-large">
              <li class="w3-center list-group-item list-group-item-action w3-light-blue">Quick Links</li>
              <a href="{{ route('applicant.index') }}" class="list-group-item list-group-item-action" style="text-decoration: none"><i class="fa fa-home"></i> &nbsp; Dashboard</a>
@@ -102,7 +58,7 @@ Success
                      <div class="w3-rest">
                         <div class="w3-panel w3-text-teal text-muted w3-round-large p-2">
                             <h3>Application Success!</h3>
-                            <p>Hello {{ Auth::user()->first_name}}, Your application has been successfully received! <a href="{{ url('/home') }}">Click to go back</a></p>
+                            <p>Hello {{ Auth::user()->first_name}}, Your application has been successfully received! <a href="{{ url('/') }}">Click to go back</a></p>
                         </div>
                      </div>
                  </div>

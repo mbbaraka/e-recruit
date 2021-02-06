@@ -5,14 +5,8 @@ Edit {{ $job->title }}
 @endsection
 
 @section('content')
-   <!-- Sidebar -->
-<div class="w3-sidebar w3-bar-block w3-border-right" style="display:none" id="mySidebar">
-  <button onclick="w3_close()" class="w3-bar-item w3-large">Close &times;</button>
-  <a href="#" class="w3-bar-item w3-button">Link 1</a>
-  <a href="#" class="w3-bar-item w3-button">Link 2</a>
-  <a href="#" class="w3-bar-item w3-button">Link 3</a>
-</div>
-
+   <!-- Navbar (sit on top) -->
+    @include('partials.admin-header')
    <!-- Page Container -->
    <div class="container w3-content" style="margin-top:80px">
      <!-- The Grid -->
@@ -32,7 +26,7 @@ Edit {{ $job->title }}
          </div>
          <br>
 
-         <div class="w3-card-4">
+         <div class="w3-card-4 w3-hide-small">
             <div class="list-group w3-round-large">
              <li class="w3-center list-group-item list-group-item-action w3-light-blue">Quick Links</li>
              <a href="{{ url('/admin') }}" class="list-group-item list-group-item-action" style="text-decoration: none"><i class="fas fa-home"></i> &nbsp; Dashboard</a>

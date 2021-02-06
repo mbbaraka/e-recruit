@@ -23,7 +23,7 @@ Route::group(['prefix' => '/', 'middleware' => 'auth', 'namespace' => 'Applicant
 
 
     // professional SKills
-    Route::post('/resume/skills/{id}/store', 'ResumeController@storeSkill')->name('applicant.skill.store');
+    Route::post('/resume/skills/{id}/store', 'ResumeController@storeSkill')->name('applicant.skills.store');
 
 
     // Jobs applied for
