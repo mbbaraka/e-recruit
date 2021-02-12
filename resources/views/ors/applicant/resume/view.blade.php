@@ -142,8 +142,8 @@ View {{ $resume->title }}
        <!-- End Middle Column -->
        </div>
        <!-- EducationModal -->
-       <div class="modal fade" id="newEducation" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
-           <div class="modal-dialog" role="document">
+       <div class="modal fade" data-backdrop="false" id="newEducation" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+           <div class="modal-dialog">
                <div class="modal-content">
                    <div class="modal-header">
                        <h5 class="modal-title">New Education Level</h5>
@@ -223,8 +223,8 @@ View {{ $resume->title }}
            </div>
        </div>
        <!-- Experience Modal -->
-       <div class="modal fade" id="newExperience" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
-        <div class="modal-dialog" role="document">
+       <div class="modal fade" data-backdrop="false" id="newExperience" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+        <div class="modal-dialog" data-backdrop="false" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title">New Work Experience Level</h5>
@@ -300,7 +300,7 @@ View {{ $resume->title }}
        </div>
 
        <!-- Skill Modal -->
-       <div class="modal fade" id="newSkill" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+       <div class="modal fade show" id="newSkill" data-backdrop="false" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -370,6 +370,7 @@ View {{ $resume->title }}
         </div>
        </div>
       <!-- End Grid -->
+      
      </div>
 
    <!-- End Page Container -->
