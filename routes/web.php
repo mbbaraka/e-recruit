@@ -26,7 +26,7 @@ require_once ('admin.php');
 // Home routes
 
 Route::group(['prefix' => '/', 'namespace' => 'Home'], function () {
-//     Route::get('/', 'HomeController@index')->name('index');
+    // Route::get('/', 'HomeController@index')->name('index');
     Route::get('/job/{id}', 'HomeController@singleJob')->name('job.single');
     Route::get('/job/{id}/apply', 'ApplicationController@index')->name('apply.index');
     Route::post('/job/apply/store', 'ApplicationController@store')->name('apply.store');

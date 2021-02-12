@@ -18,6 +18,7 @@ Route::group(['prefix' => '/admin', 'middleware' => 'can:isAdmin, 1', 'namespace
     Route::get('/shortlist', 'ShortlistController@index')->name('admin.shortlist.index');
     Route::post('/shortlist/add', 'ShortlistController@store')->name('admin.shortlist.add');
     Route::get('/notifications', 'ShortlistController@store')->name('admin.shortlist.add');
+    Route::get('/profile', 'HomeController@profile')->name('admin.profile.index');
     // Route::get('/appraisers', 'PageController@appraisers')->name('hr.appraisers');
     // Route::get('/appraisals', 'PageController@appraisals')->name('hr.appraisals');
     // Route::get('/', 'HomeController@index')->name('hr.index');

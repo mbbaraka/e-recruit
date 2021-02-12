@@ -12,9 +12,14 @@ class HomeController extends Controller
 {
     public function index()
     {
-        $user = Auth::user()->id;
-        $user = User::find($user);
-        $particulars = Particular::where('user_id', $user->id)->first();
-        return view('ors.applicant.index', compact('user', 'particulars'));
+    	if (Auth::user()->is_admin == '1') {
+            return redirect()->route('admin.index');
+        }else{            
+            $user = Auth::user()->id;
+	        $user = User::find($user);
+	        $particulars = Particular::where('user_id', $user->id)->first();
+	        return view('ors.applicant.index', compact('user', 'particulars'));
+        }
+        
     }
 }

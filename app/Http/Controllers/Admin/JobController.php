@@ -49,11 +49,8 @@ class JobController extends Controller
             'title' => 'required',
             'deadline' => 'required',
             'description' => 'required',
-            'type' => 'required',
             'category' => 'required',
             'document' => 'nullable|mimes:txt,pdf,doc',
-            'qualification' => 'required',
-            'experience' => 'required',
         ]);
 
         $file = $request->file('document');
@@ -98,10 +95,7 @@ class JobController extends Controller
             'title' => 'required',
             'deadline' => 'required',
             'description' => 'required',
-            'type' => 'required',
             'document' => 'nullable|mimes:txt,pdf,doc',
-            'qualification' => 'required',
-            'experience' => 'required',
         ]);
 
         $job = Job::findOrFail($id);

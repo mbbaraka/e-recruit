@@ -24,4 +24,11 @@ class HomeController extends Controller
         $notification = Notification::where('receiver_id', Auth::user()->id)->where('status', '0')->get();
         return view('ors.admin.index', compact('user', 'particulars', 'applications', 'jobs', 'all_jobs', 'all_applications', 'notification'));
     }
+
+    public function profile()
+    {
+        $user = User::find(Auth::user()->id);
+        $particulars = Particular::where('user_id', $user->id)->first();
+        return view('ors.admin.profile.index', compact('user', 'particulars'));
+    }
 }
