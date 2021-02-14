@@ -105,7 +105,7 @@ Administrator
                         <div class="w3-container w3-card-4 w3-hover-shadow w3-white w3-theme-d2 w3-padding-16 w3-round w3-round-large">
                           <div class="w3-left"><i class="fa fa-briefcase w3-xxxlarge"></i></div>
                           <div class="w3-right">
-                            <h3>{{-- {{ count($all_jobs) }} --}}</h3>
+                            <h3>{{ count($all_jobs) }}</h3>
                           </div>
                           <div class="w3-clear"></div>
                           <h4>New Jobs</h4>
@@ -115,7 +115,7 @@ Administrator
                         <div class="w3-container w3-card-4 w3-hover-shadow w3-white w3-theme-d2 w3-padding-16 w3-round w3-round-large">
                           <div class="w3-left"><i class="fa fa-envelope w3-xxxlarge"></i></div>
                           <div class="w3-right">
-                            <h3>{{-- {{ count($all_applications) }} --}}</h3>
+                            <h3>{{ count($all_applications) }}</h3>
                           </div>
                           <div class="w3-clear"></div>
                           <h4>Applications</h4>
@@ -135,7 +135,7 @@ Administrator
                         <div class="w3-container w3-card-4 w3-hover-shadow w3-white w3-theme-d2 w3-padding-16 w3-round w3-round-large">
                           <div class="w3-left"><i class="fa fa-bell w3-xxxlarge"></i></div>
                           <div class="w3-right">
-                            <h3>{{-- {{ count($notification) }} --}}</h3>
+                            <h3>{{ ORS::notification() }}</h3>
                           </div>
                           <div class="w3-clear"></div>
                           <h4>Notifications</h4>
