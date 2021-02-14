@@ -64,6 +64,19 @@ Route::group(['prefix' => '/', 'middleware' => 'auth', 'namespace' => 'Applicant
     Route::get('/jobs/applied', 'JobController@index')->name('applicant.jobs.applied');
     Route::get('/jobs', 'JobController@index')->name('applicant.jobs.index');
 
+    //notifications
+    Route::get('/notifications', 'NotificationController@index')->name('applicant.notifications');
+
+    //applications
+    Route::get('/applications', 'HomeController@applications')->name('applicant.applications');
+
+    //applications
+    Route::get('/cover-letters', 'LetterController@index')->name('applicant.letters');
+
+    //applications
+    Route::post('/cover-letters/store', 'LetterController@store')->name('applicant.letter.store');
+
+
 
 
 });

@@ -1,12 +1,13 @@
 @extends('ors.layouts.app')
 
 @section('title')
-Success
+My Applications
 @endsection
 
 @section('content')
    <!-- Navbar (sit on top) -->
     @include('partials.header')
+
    <!-- Page Container -->
    <div class="container w3-content" style="margin-top:80px">
      <!-- The Grid -->
@@ -27,15 +28,15 @@ Success
          <br>
 
          <div class="w3-card-4 w3-hide-small">
-           <div class="list-group w3-round-large">
+            <div class="list-group w3-round-large">
              <li class="w3-center list-group-item list-group-item-action w3-light-blue">Quick Links</li>
              <a href="{{ route('applicant.index') }}" class="list-group-item list-group-item-action" style="text-decoration: none"><i class="fa fa-home"></i> &nbsp; Dashboard</a>
              <a href="{{ route('applicant.resume.index') }}" class="list-group-item list-group-item-action" style="text-decoration: none"><i class="fa fa-paper-plane"></i> &nbsp; My Resume</a>
-             <a href="{{ route('applicant.jobs.index') }}" class="list-group-item list-group-item-action active" style="text-decoration: none"><i class="fa fa-briefcase"></i> &nbsp; Available Jobs</a>
+             <a href="{{ route('applicant.jobs.index') }}" class="list-group-item list-group-item-action" style="text-decoration: none"><i class="fa fa-briefcase"></i> &nbsp; Available Jobs</a>
              <a href="{{ route('applicant.letters') }}" class="list-group-item list-group-item-action" style="text-decoration: none"><i class="fa fa-envelope"></i> &nbsp; Cover Letter</a>
-             <a href="#" class="list-group-item list-group-item-action" style="text-decoration: none"><i class="fa fa-paper-plane"></i> &nbsp; My Interviews</a>
-             <a href="{{ route('applicant.profile.index') }}" class="list-group-item list-group-item-action" style="text-decoration: none"><i class="fa fa-file"></i> &nbsp; My Profile</a>
-            </div>
+             <a href="#" class="list-group-item list-group-item-action" style="text-decoration: none"><i class="fa fa-question"></i> &nbsp; My Interviews</a>
+             <a href="{{ route('applicant.profile.index') }}" class="list-group-item list-group-item-action" style="text-decoration: none"><i class="fa fa-user"></i> &nbsp; My Profile</a>
+             </div>
          </div>
          <br>
 
@@ -49,19 +50,43 @@ Success
            <div class="w3-col m12">
              <div class="w3-card w3-round w3-white">
                <div class="w3-container w3-padding">
-                 <h2>
-                     Application Successful
-                 </h2>
-                 {{-- <span class="w3-right w3-jumbo"><i class="fa fa-return"></i></span> --}}
-                 <hr class="w3-clear">
-                 <div class="w3-row-padding">
-                     <div class="w3-rest">
-                        <div class="w3-panel w3-text-teal text-muted w3-round-large p-2">
-                            <h3>Application Success!</h3>
-                            <p>Hello {{ Auth::user()->first_name}}, Your application has been successfully received! <a href="{{ url('/') }}">Click to go back</a></p>
-                        </div>
-                     </div>
-                 </div>
+                  <!-- Header -->
+                  <div class="w3-panel">
+                    <div class="w3-row-padding" style="margin:0 -16px">
+                      <div class="w3-full">
+                      	<div class="card">
+                      		<div class="card-header">
+		                        <h5>My Applications</h5>
+		                    </div>
+		                    <div class="card-body">
+		                        <table class="w3-table table-responsive-sm table-hover">
+		                          @if(count($applications) > 0)
+		                          <thead>
+		                          	<tr>
+		                          		<th>S/n</th>
+		                          		<th>Job Title</th>
+		                          		<th>Job Deadline</th>
+		                          		<th>Date Applied</th>
+		                          	</tr>
+		                          </thead>
+		                          @foreach ($applications as $key => $app)
+		                            <tr>
+		                              <td>{{ $key + 1 }}</td>
+		                              <td>{{ $app->jobs->title }}</td>
+		                              <td>{{ date('d M, Y', strtotime($app->jobs->deadline)) }}</td>
+		                              <td><i>{{ $app->created_at->diffForHumans() }}</i></td>
+		                            </tr>
+		                          @endforeach
+		                          @else
+		                          <tr><td>No Applications yet! </td></tr>
+		                          @endif
+		                        </table>
+		                    </div>
+	                    </div>
+                      </div>
+                    </div>
+                  </div>
+
                </div>
              </div>
            </div>

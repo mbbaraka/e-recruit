@@ -85,7 +85,7 @@ class JobController extends Controller
                $job->category()->sync($request->input('category',[]));
               }
             toast('Successfully added new job', 'success');
-            return redirect()->back();
+            return redirect()->route('ors.admin.jobs.index');
         }
     }
 

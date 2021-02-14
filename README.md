@@ -1,70 +1,25 @@
 
 ## About Online Recruitment System (ORS)
 
-Online Recruitment System (ORS) is an online platform used by a company to recruit employees. Employers through the Human Resource Department post available job opportunities on their website for public consuption. The viewers once interested open an account and start feeding in their details such as profile details, resumes and cover letters in order to apply for a certain opportunity of interest. After receiving applications, the recruiter goes through the candicates' profile one at ago and selects item for an interview. 
+Online Recruitment System (ORS) is an online platform used by a company to recruit employees. Employers through the Human Resource Department post available job opportunities on their website for only registered users' consuption. The viewers once interested start feeding in their details such as profile details, resumes and cover letters in order to apply for a certain opportunity of interest. After receiving applications, the recruiter goes through the candicates' profile one at ago and selects item for an interview. 
 The HR schedules an iterview for the shortlisted candidate.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+For demo [clck here](http://18.191.119.30/). Admin login admin@admin.com password: helloworld
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+For installation instructions
+1. Clone the repository in your root folder e.g htdocs folder
+2. Open example.env and save in the same path as .env
+3. Open cmd or any command terminal and c.d into your project folder
+4. Generate a key for the project using "php artisan key:generate" command.
+5. Install dependencies using "composer install" command.  I assume you've composer installed already. If not download form [here](https://getcomposer.org).
+Open a .env file and fill in your database username, database and password if any.
+6. Run the migrations using "php artisan migrate --seed" command. This will install the tables and create an administrator user.
+7. Start the server using "php artisan serve" command
+8. Open your favorite browser and run [127.0.0.1:8000](127.0.0.1:8000)
+9. Enjoy your app. (modify where possible)
 
-## Learning Laravel
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
-
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
-
-## Laravel Sponsors
-
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
-
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[British Software Development](https://www.britishsoftware.co)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- [UserInsights](https://userinsights.com)
-- [Fragrantica](https://www.fragrantica.com)
-- [SOFTonSOFA](https://softonsofa.com/)
-- [User10](https://user10.com)
-- [Soumettre.fr](https://soumettre.fr/)
-- [CodeBrisk](https://codebrisk.com)
-- [1Forge](https://1forge.com)
-- [TECPRESSO](https://tecpresso.co.jp/)
-- [Runtime Converter](http://runtimeconverter.com/)
-- [WebL'Agence](https://weblagence.com/)
-- [Invoice Ninja](https://www.invoiceninja.com)
-- [iMi digital](https://www.imi-digital.de/)
-- [Earthlink](https://www.earthlink.ro/)
-- [Steadfast Collective](https://steadfastcollective.com/)
-- [We Are The Robots Inc.](https://watr.mx/)
-- [Understand.io](https://www.understand.io/)
-- [Abdel Elrafa](https://abdelelrafa.com)
-- [Hyper Host](https://hyper.host)
-- [Appoly](https://www.appoly.co.uk)
-- [OP.GG](https://op.gg)
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+If you discover a security vulnerability within ORS, please send an e-mail toa [markbrightbaraka@gmail.com](mailto:markbrightbaraka@gmail.com). All security vulnerabilities will be promptly addressed.
 
 ## License
 

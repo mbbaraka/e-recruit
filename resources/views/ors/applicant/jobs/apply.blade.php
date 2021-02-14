@@ -32,7 +32,7 @@ Apply for Job
              <a href="{{ route('applicant.index') }}" class="list-group-item list-group-item-action" style="text-decoration: none"><i class="fa fa-home"></i> &nbsp; Dashboard</a>
              <a href="{{ route('applicant.resume.index') }}" class="list-group-item list-group-item-action" style="text-decoration: none"><i class="fa fa-paper-plane"></i> &nbsp; My Resume</a>
              <a href="{{ route('applicant.jobs.index') }}" class="list-group-item list-group-item-action active" style="text-decoration: none"><i class="fa fa-briefcase"></i> &nbsp; Available Jobs</a>
-             <a href="#" class="list-group-item list-group-item-action" style="text-decoration: none"><i class="fa fa-envelope"></i> &nbsp; Cover Letter</a>
+             <a href="{{ route('applicant.letters') }}" class="list-group-item list-group-item-action" style="text-decoration: none"><i class="fa fa-envelope"></i> &nbsp; Cover Letter</a>
              <a href="#" class="list-group-item list-group-item-action" style="text-decoration: none"><i class="fa fa-paper-plane"></i> &nbsp; My Interviews</a>
              <a href="{{ route('applicant.profile.index') }}" class="list-group-item list-group-item-action" style="text-decoration: none"><i class="fa fa-file"></i> &nbsp; My Profile</a>
             </div>
@@ -82,6 +82,21 @@ Apply for Job
                                        </span>
                                    @enderror
                                </div>
+                               <br>
+                               <div class="w3-container pb-3">
+                                   <span class="w3-label">Select Letter *</span>
+                                   <select class="w3-input w3-round w3-round-large @error('letter') w3-border-red @enderror" name="letter" id="" value="{{ old('letter') }}">
+                                       @foreach ($letters as $letter)
+                                           <option value="{{ $letter->id }}">{{ $letter->title }}</option>
+                                       @endforeach
+                                   </select>
+                                   @error('letter')
+                                       <span class="w3-text-red" role="alert">
+                                           <strong>{{ $message }}</strong>
+                                       </span>
+                                   @enderror
+                               </div>
+                               <br>
                                <div class="w3-container pb-3">
                                    <span class="w3-label">Describe Yourself *</span>
                                    <textarea name="description" id="" cols="30" rows="10" class="w3-input w3-round w3-round-large @error('description') w3-border-red @enderror"></textarea>
@@ -115,7 +130,7 @@ Apply for Job
    <br>
 
    <!-- Footer -->
-   <footer class="w3-container w3-theme-d3 w3-padding-16">
-     <h5>Footer</h5>
+   <footer class="w3-container w3-theme-d3 w3-padding-16 text-center">
+     <h5>Online Recruitment System (ORS) &copy; {{ date('Y') }}</h5>
    </footer>
 @endsection

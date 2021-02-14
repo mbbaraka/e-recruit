@@ -33,7 +33,7 @@
              <a href="{{ route('applicant.index') }}" class="list-group-item list-group-item-action" style="text-decoration: none"><i class="fa fa-home"></i> &nbsp; Dashboard</a>
              <a href="{{ route('applicant.resume.index') }}" class="list-group-item list-group-item-action" style="text-decoration: none"><i class="fa fa-paper-plane"></i> &nbsp; My Resume</a>
              <a href="{{ route('applicant.jobs.index') }}" class="list-group-item list-group-item-action active" style="text-decoration: none"><i class="fa fa-briefcase"></i> &nbsp; Available Jobs</a>
-             <a href="#" class="list-group-item list-group-item-action" style="text-decoration: none"><i class="fa fa-envelope"></i> &nbsp; Cover Letter</a>
+             <a href="{{ route('applicant.letters') }}" class="list-group-item list-group-item-action" style="text-decoration: none"><i class="fa fa-envelope"></i> &nbsp; Cover Letter</a>
              <a href="#" class="list-group-item list-group-item-action" style="text-decoration: none"><i class="fa fa-paper-plane"></i> &nbsp; My Interviews</a>
              <a href="{{ route('applicant.profile.index') }}" class="list-group-item list-group-item-action" style="text-decoration: none"><i class="fa fa-file"></i> &nbsp; My Profile</a>
              </div>
@@ -52,7 +52,11 @@
                <div class="w3-container w3-padding">
                  <h2>
                      {{ $job->title }}
+                     @can('isAdmin', Auth::user()->is_admin)
+                     
+                     @else
                      <a class="btn-sm w3-right w3-btn w3-round w3-light-blue" href="{{ route('apply.index', $job->id) }}">Apply Now</a>
+                     @endcan
                  </h2>
                  {{-- <span class="w3-right w3-jumbo"><i class="fa fa-return"></i></span> --}}
                  <hr class="w3-clear">
@@ -78,13 +82,17 @@
                         </p>
                         <p>
                             @if (file_exists('storage/documents/'. $job->document))
-                               <a href="{{ URL('storage/documents/'. $job->document) }}" download target="_blank">Click to download descriptions</a>
+                               <a href="{{ URL('storage/documents/'. $job->document) }}" target="_blank">Click to download descriptions</a>
                             @endif
                         </p>
                      </div>
                      <hr>
                      <div class="w3-container w3-panel">
-                        <a class="btn-sm w3-right w3-btn w3-round w3-light-blue" href="{{ route('apply.index', $job->id) }}">Apply Now</a>
+                       @can('isAdmin', Auth::user()->is_admin)
+                     
+                       @else
+                       <a class="btn-sm w3-right w3-btn w3-round w3-light-blue" href="{{ route('apply.index', $job->id) }}">Apply Now</a>
+                       @endcan
                      </div>
 
                  </div>
@@ -104,7 +112,7 @@
    <br>
 
    <!-- Footer -->
-   <footer class="w3-container w3-theme-d3 w3-padding-16">
-     <h5>Footer</h5>
+   <footer class="w3-container w3-theme-d3 w3-padding-16 text-center">
+     <h5>Online Recruitment System (ORS) &copy; {{ date('Y') }}</h5>
    </footer>
 @endsection

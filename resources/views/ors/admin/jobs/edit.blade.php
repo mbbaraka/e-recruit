@@ -205,7 +205,7 @@ Edit {{ $job->title }}
    <br>
 
    <!-- Footer -->
-   <footer class="w3-container w3-theme-d3 w3-padding-16 w3-center">
-     <h5>{{ date('Y') }} &copy; Online Recruitment System </h5>
+   <footer class="w3-container w3-theme-d3 w3-padding-16 text-center">
+     <h5>Online Recruitment System (ORS) &copy; {{ date('Y') }}</h5>
    </footer>
 @endsection

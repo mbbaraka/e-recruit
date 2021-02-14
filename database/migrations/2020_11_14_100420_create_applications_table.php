@@ -18,12 +18,14 @@ class CreateApplicationsTable extends Migration
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('job_id');
             $table->unsignedBigInteger('resume_id');
+            $table->unsignedBigInteger('letter_id');
             $table->text('description')->nullable();
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('job_id')->references('id')->on('jobs')->onDelete('cascade');
             $table->foreign('resume_id')->references('id')->on('resumes')->onDelete('cascade');
+            $table->foreign('letter_id')->references('id')->on('letters')->onDelete('cascade');
         });
     }
 

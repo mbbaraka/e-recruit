@@ -34,7 +34,7 @@ View {{ $resume->title }}
              <a href="{{ route('applicant.index') }}" class="list-group-item list-group-item-action" style="text-decoration: none"><i class="fa fa-home"></i> &nbsp; Dashboard</a>
              <a href="{{ route('applicant.resume.index') }}" class="list-group-item list-group-item-action active" style="text-decoration: none"><i class="fa fa-paper-plane"></i> &nbsp; My Resume</a>
              <a href="{{ route('applicant.jobs.index') }}" class="list-group-item list-group-item-action" style="text-decoration: none"><i class="fa fa-briefcase"></i> &nbsp; Available Jobs</a>
-             <a href="#" class="list-group-item list-group-item-action" style="text-decoration: none"><i class="fa fa-envelope"></i> &nbsp; Cover Letter</a>
+             <a href="{{ route('applicant.letters') }}" class="list-group-item list-group-item-action" style="text-decoration: none"><i class="fa fa-envelope"></i> &nbsp; Cover Letter</a>
              <a href="#" class="list-group-item list-group-item-action" style="text-decoration: none"><i class="fa fa-question"></i> &nbsp; My Interviews</a>
              <a href="{{ route('applicant.profile.index') }}" class="list-group-item list-group-item-action" style="text-decoration: none"><i class="fa fa-user"></i> &nbsp; My Profile</a>
              </div>
@@ -131,8 +131,6 @@ View {{ $resume->title }}
                         </div>
                         @endif
                       </div>
-
-
                  </div>
                </div>
              </div>
@@ -224,7 +222,7 @@ View {{ $resume->title }}
        </div>
        <!-- Experience Modal -->
        <div class="modal fade" data-backdrop="false" id="newExperience" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
-        <div class="modal-dialog" data-backdrop="false" role="document">
+        <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title">New Work Experience Level</h5>
@@ -378,7 +376,7 @@ View {{ $resume->title }}
    <br>
 
    <!-- Footer -->
-   <footer class="w3-container w3-theme-d3 w3-padding-16">
-     <h5>Footer</h5>
+   <footer class="w3-container w3-theme-d3 w3-padding-16 text-center">
+     <h5>Online Recruitment System (ORS) &copy; {{ date('Y') }}</h5>
    </footer>
 @endsection

@@ -24,10 +24,10 @@
     <nav class="w3-sidebar mt-07 w3-bar-block w3-black w3-card w3-animate-left w3-hide-medium w3-hide-large" style="display:none;" id="mySidebar">
       <a href="javascript:void(0)" onclick="w3_close()" class="w3-bar-item w3-button w3-large w3-padding-16">Close ×</a>
       <a href="{{ route('applicant.index') }}" onclick="w3_close()" class="w3-bar-item w3-button"><i class="fa fa-home"></i> &nbsp; Home</a>
-      <a href="#team" onclick="w3_close()" class="w3-bar-item w3-button"><i class="fa fa-bell"></i> &nbsp; Notifications <sup class="badge badge-danger text-light">3</sup></a>
+      <a href="#team" onclick="w3_close()" class="w3-bar-item w3-button"><i class="fa fa-bell"></i> &nbsp; Notifications <sup class="badge badge-danger text-light">{{ ORS::notification() }}</sup></a>
       <a href="{{ route('applicant.resume.index') }}" onclick="w3_close()" class="w3-bar-item w3-button"><i class="fa fa-paper-plane"></i> &nbsp; My Resume</a>
       <a href="{{ route('applicant.jobs.index') }}" onclick="w3_close()" class="w3-bar-item w3-button"><i class="fa fa-briefcase"></i> &nbsp; Available Jobs</a>
-      <a href="#team" onclick="w3_close()" class="w3-bar-item w3-button"><i class="fa fa-envelope"></i> &nbsp; Cover Letter</a>
+      <a href="{{ route('applicant.letters') }}" onclick="w3_close()" class="w3-bar-item w3-button"><i class="fa fa-envelope"></i> &nbsp; Cover Letter</a>
       <a href="#team" onclick="w3_close()" class="w3-bar-item w3-button"><i class="fa fa-question"></i> &nbsp; My Interviews</a>
       <a href="{{ route('applicant.profile.index') }}" onclick="w3_close()" class="w3-bar-item w3-button"><i class="fa fa-user"></i> &nbsp; My Profile</a>
       <a href="{{ route('logout') }}" onclick="event.preventDefault();

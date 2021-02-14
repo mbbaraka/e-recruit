@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Home;
 
 use App\Http\Controllers\Controller;
 use App\Models\Applicant\Resume;
+use App\Models\Applicant\Letter;
 use App\Models\Home\Application;
 use App\User;
 use App\Models\Applicant\Particular;
@@ -38,13 +39,15 @@ class ApplicationController extends Controller
         $applications = Application::where('job_id', $id)->get()->count();
         $views = JobView::where('job_id', $id)->count();
         $resumes = Resume::where('user_id', Auth::user()->id)->get();
-        return view('ors.applicant.jobs.apply', compact('job', 'resumes', 'views', 'user', 'particulars', 'applications'));
+        $letters = Letter::where('user_id', Auth::user()->id)->get();
+        return view('ors.applicant.jobs.apply', compact('job', 'resumes', 'views', 'user', 'letters', 'particulars', 'applications'));
     }
 
     public function store(Request $request)
     {
         $this->validate($request, [
             'resume' => 'required',
+            'letter' => 'required',
             'description' => 'required'
         ]);
 
@@ -52,6 +55,7 @@ class ApplicationController extends Controller
         $application->job_id = $request->job_id;
         $application->user_id = Auth::user()->id;
         $application->resume_id = $request->resume;
+        $application->letter_id = $request->letter;
         $application->description = $request->description;
 
         $save = $application->save();
